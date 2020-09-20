@@ -22,7 +22,12 @@ export default function Upload() {
   return (
     <div>
       <form>
-        <input type="file" name="image" onChange={changeHandler}></input>
+        <input
+          type="file"
+          name="image"
+          onChange={changeHandler}
+          className="uploadBtn"
+        ></input>
         <div className="output">
           {error && <div className="error">{error}</div>}
           {file && <div>{file.name}</div>}

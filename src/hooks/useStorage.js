@@ -8,6 +8,7 @@ const useStorage = (file) => {
 
   useEffect(() => {
     const storageref = storage.ref(file.name);
+    const dbref = db.collection("images");
 
     storageref.put(file).on(
       "state_changed",
@@ -20,10 +21,12 @@ const useStorage = (file) => {
       },
       async () => {
         const url = await storageref.getDownloadURL();
+        dbref.add({ url: url, createdAt: Date.now() });
         setUrl(url);
       }
     );
   }, [file]);
+
   return { progress, url, error };
 };
 
